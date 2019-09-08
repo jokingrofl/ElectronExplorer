@@ -1,0 +1,517 @@
+/* Colors: #2F4F4F #80FFFF #66FFFF #B35824 #FF9F66 */
+:root{
+  --bar-size: 30px;
+  --tools-size: 200px;
+}
+
+body, html {
+    text-align: center;
+}
+
+h1, h2, h3, h4, p{
+  color: white;
+}
+
+#topBar{
+  position: relative;
+  width: 100%;
+  background-color: darkslategrey;
+  height: var(--tools-size);
+}
+
+#textBox1 {
+  width: 50%;
+  height: 35px;
+  margin-top: 35px;
+}
+
+.label{
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#title{
+  color: white;
+  float: left;
+  position: absolute;
+  top: 0;
+  bottom: 10px;
+  left: 10px;
+  -webkit-user-select: none;
+  height: 20px;
+  width: auto;
+  font-size: 12px;
+}
+
+#titleBar::before{
+  content: "";
+  background-color: rgba(47, 79, 79, 0.568);
+  filter: blur(12px);
+}
+
+#titleBar{
+  width: 100%;
+  height: var(--bar-size);
+  position: fixed;
+  z-index: 10;
+  /*
+  background-color: rgba(0, 0, 0, 0.452);
+  */
+  background-color: rgba(47, 79, 79, 0.568);
+  top: 0;
+  -webkit-app-region: drag;
+  overflow: hidden;
+  transition: 2s;
+}
+
+#titleBar::after{
+  content: "";
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.1;
+  filter: blur(0px);
+  z-index: -1;
+}
+
+#titleBar:hover{
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#controls-container{
+  align-content: right;
+  height: 100%;
+  width: 100px;
+  float: right;
+}
+
+#close{
+  padding-left: 5px;
+}
+
+#close:hover{
+  background-color: red;
+  color: white;
+}
+
+.control{
+  color: white;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-app-region: no-drag;
+  margin: 0;
+  border: 0;
+}
+
+.control:hover{
+  cursor: default;
+  background-color: blue;
+}
+
+#debug{
+  position: fixed;
+  z-index: 10;
+}
+
+#main{
+  position: absolute;
+  top: var(--bar-size)!important;
+  bottom: 0;
+  height: calc(100vmin - var(--bar-size));
+  width: 100vmax;
+  background-color: darkslategray;
+  overflow-y: hidden;
+}
+
+.popUp{
+  display: none;
+  height: 100vh;
+  width: 100%;
+  top: var(--bar-size);
+  position: fixed;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 11;
+  transition: all 2s;
+  animation-name: zoom;
+  animation-duration: 0.3s;
+}
+
+.textContainer{
+  height: auto;
+  width: 75%;
+  background-color:black;
+  border: solid 2px #2F4F4F;
+  border-radius: 25px;
+  margin: auto;
+  padding: 20px;
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  display: block;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#breadcrumbs{
+  width: 100%;
+  height: auto;
+}
+
+#breadcrumbs .button{
+  border-radius: 10px;
+}
+
+.fixed{
+  position: sticky;
+  top: 20vh;
+  width: 100%;
+  display: block;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.171);
+  transition: 1s;
+}
+
+.fixed:hover{
+  background-color: rgba(0, 0, 0, 0.555);
+}
+
+.fileContainer{
+  width: 25%;
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.5s;
+  position: relative;
+}
+
+.fileContainer:hover{
+  background-color: rgba(0, 0, 0, 0.555);
+}
+
+.fileContainer2{
+  width: 50%;
+  height: auto;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.fileContainer2 img{
+  max-width: 50%!important;
+}
+
+.fileContainer2:hover{
+  background-color: rgba(0, 0, 0, 0.555);
+}
+
+.selected{
+  background-color: rgba(0, 0, 0, 0.555);
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: auto;
+  background-color: darkslategrey;
+}
+
+.icon{
+  max-width: 25%;
+  margin: auto;
+  height: auto;
+  transition: width 2s;
+  cursor: pointer;
+}
+
+.thumbnail{
+  max-width: 50%;
+  margin: auto;
+  height: auto;
+  transition: width 2s;
+  cursor: pointer;
+}
+
+.preview{
+  animation-name: zoom;
+  animation-duration: 0.5s;
+  max-height: 150px;
+}
+
+#content img{
+  transition: 0.5s;
+}
+
+#content .zoom-hover:hover {
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    top: 50;
+    transform: scale(1.3);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 4; /* Stay on top */
+  top: var(--bar-size); /* Stay at the top */
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.750); /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.sidenav:hover {
+  background-color: rgba(17, 17, 17, 0.900);
+}
+
+/* The navigation menu links */
+.sidenav a, .sidenav .container {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .sidenav .container:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/*style checkbox*/
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: white;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 3; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  position: relative;
+  transform-origin: top left;
+  
+  -webkit-transition: all 0.5s ease-in-out; /* Safari */
+  transition: all 0.5s ease-in-out;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes iconTranslate {
+  from{top: 50%; left: 50%;}
+  to{top: 0; left: 10%;}
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+
+/* zoom into view */
+@keyframes zoom {
+  from {transform: scale(0.1); opacity: 0;} 
+  to {transform: scale(1); opacity: 1;}
+}
+
+/* zoom in after clicking modal */
+@keyframes zoom2 {
+    from {transform: scale(1)}
+    to {transform: scale(2)}
+}
+
+/* zoom out after clicking modal */
+@keyframes zoomOut {
+    from {transform: scale(2)}
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.button {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* Green */
+  padding: 7px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+#buttons{
+    padding-bottom: 0;
+}
+
+.video-container{
+  width: 25%;
+  display: inline-block;
+  height: auto;
+  padding-bottom: 40px;
+}
+
+video {
+  max-width: 100%;
+  margin: auto;
+  height: auto;
+}
+
+.corner-icon{
+  position: absolute;
+  top: 0;
+  left: 10%;
+  z-index: 2;
+  width: 15%;
+  height: auto;
+  vertical-align: unset;
+  animation-name: iconTranslate;
+  animation-duration: 0.75s;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>ElectronExplorer</title>
+</head>
+
+<body>
+        <div id="about" class="popUp">
+                <div class="textContainer">
+                        <h2>About</h2>
+                        <p>ElectronExplorer by Pablo Sanchez</p>
+                        <input class="button" type="button" value="Close" onclick="toggleAbout()">
+                </div>
+        </div>
+        <div id="titleBar">
+                <h4 id="title">ElectronExplorer</h4>
+                <div id="controls-container">
+                        <a class="control" onclick="minimize()">_</a>
+                        <a class="control" onclick="maximize()">O</a>
+                        <a class="control" id="close" onclick="quit()">X</a>
+                </div>
+        </div>
+
+        <div id="popUp01" class="popUp">
+                <div class="textContainer">
+                        <h2 id="popUpTitle">Name</h2>
+                        <p id="popUpText">Stats</p>
+                        <input class="button" type="button" value="Close" onclick="togglePopUp()">
+                </div>
+        </div>
+
+        <h3 id="debug">Debug</h3>
+        <div id="main">
+                <div id="topBar">
+                                <input class="button" type="button" value="Home" onclick="start()">
+                                <input class="button" type="button" value="<-" onclick="back()">
+                                <input class="button" type="button" value="^" onclick="up()">
+                        <input id="textBox1" type="text" size="35" name="url" placeholder="C:/Users/Public/Movies"
+                                autofocus>
+                                <input class="button" type="button" value="->" onclick="onButton()">
+                                <input class="button" type="button" value="Settings" onclick="toggleNav()">
+                                <br><br>
+                        <div id="breadcrumbs">
+
+                        </div>
+                        <div id="buttons">
+                                <h3 id="directory">Directory</h3>
+                                
+                                
+                                
+                        </div>
+                </div>
+
+                <div id="content">
+
+                </div>
+                <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="#" onclick="toggleAbout()">About</a>
+                        <label class="container">Zoom on Hover
+                                <input type="checkbox" id="zoomCheck" onclick="toggleZoom()" checked="checked">
+                                <span class="checkmark"></span>
+                        </label>
+                        <label class="container">Large Thumbnails
+                                <input type="checkbox" id="thumbCheck" onclick="toggleThumbs()">
+                                <span class="checkmark"></span>
+                        </label>
+                        <label class="container" onclick="showFiles()">Debugging</label>
+                </div>
+                <script type="text/javascript" src="helper.js"></script>
+                <script type="text/javascript" src="files.js"></script>
+                <script type="text/javascript" src="ipcHandlers.js"></script>
+                <script type="text/javascript" src="script.js"></script>
+                <script type="text/javascript" src="pop_up.js"></script>
+                <script type="text/javascript" src="explorer_item.js"></script>
+
+                <div id="myModal" class="modal">
+                        <span class="close">×</span>
+                        <img class="modal-content" onclick="zoom(this)" onkeydown="myKeyDown(event)" id="img01">
+                        <div id="caption"></div>
+                </div>
+        </div>
+
+        <script>
+                // Get the modal
+                var modal = document.getElementById('myModal');
+
+                // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById('myImg');
+                var modalImg = document.getElementById("img01");
+                var captionText = document.getElementById("caption");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function () {
+                        modal.style.display = "none";
+                        var image = document.getElementById("img01");
+                        image.style.animationName = 'zoom';
+                }
+        </script>
+
+</body>
+
+</html>
