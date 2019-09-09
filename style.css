@@ -213,7 +213,7 @@ h1, h2, h3, h4, p{
 
 #content{
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--tools-size));
   position: relative;
   overflow: auto;
   background-color: darkslategrey;
