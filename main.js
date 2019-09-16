@@ -14,7 +14,6 @@ var selectedElement;
 const {app, BrowserWindow, Menu, ipcMain, shell} = electron;
 
 let mainWindow;
-var favorites = [];
 var currentDirectory;
 
 //context menus
@@ -63,10 +62,19 @@ app.on('ready', function(){
     const toggleDevTools = new MenuItem({
         role: "toggleDevtools"
     });
+
+    const getInfo = new MenuItem({
+        label: "Get Info",
+        click: (menu, window, event) =>{
+            mainWindow.webContents.send('getInfo');
+        }
+    })
     
     ctxImage.append(openFileLocation);
     ctxImage.append(toggleDevTools);
+    ctxImage.append(getInfo);
     ctxMenu.append(toggleDevTools);
+    ctxMenu.append(getInfo);
 
     mainWindow.webContents.on('context-menu', function(e, params){
         selectedUrl = params.srcURL.substr(8);
@@ -216,8 +224,9 @@ ipcMain.on('getFirstImage', (e, dir_path) => {
 });
 
 function isImage(name){
-    return (name.indexOf('.jpg') >= 0 || name.indexOf('.png') >= 0 ||
-    name.indexOf('.gif') >= 0 || name.indexOf('.jpeg') >= 0 || name.indexOf('.PNG') >= 0);
+    let str = name.toLowerCase();
+    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('png') ||
+    str.includes('gif'));
 }
 
 function isVideo(name){

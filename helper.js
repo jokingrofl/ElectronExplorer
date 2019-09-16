@@ -47,8 +47,9 @@ document.ondrop = function(e){
 
 //helper functions ---------------------------------------------------------------
 function isImage(name){
-    return (name.indexOf('.jpg') >= 0 || name.indexOf('.png') >= 0 ||
-    name.indexOf('.gif') >= 0 || name.indexOf('.jpeg') >= 0 || name.indexOf('.PNG') >= 0);
+    let str = name.toLowerCase();
+    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('png') ||
+    str.includes('gif'));
 }
 
 function isVideo(name){
@@ -92,9 +93,7 @@ function myKeyDown(e){
     if (keynum == 77){ //m key
         remote.getCurrentWindow().minimize();
     }
-    if (keynum == 75){ //k key
-        fixButtons();
-    }
+
 
     console.log("Reached end of function: " + keynum);
   }

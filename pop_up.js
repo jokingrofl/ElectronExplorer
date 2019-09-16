@@ -14,24 +14,14 @@ function displayAllStats(){
 
 function displayStats(stats){
     var popUp = document.getElementById('popUp01');
-    document.getElementById('modName').innerText = "File Details";
-    var statsText = "Name: " + rightClickedElement.getAttribute('src');
+    document.getElementById('popUpTitle').innerText = "File Details";
+    var statsText = "Path: " + rightClickedElement.getAttribute('data-path');
     var size = stats.size / 1000000;
     statsText += "\nSize: " + size + " megabytes";
     statsText += "\nCreated: " + stats.ctime;
     statsText += "\nModified: " + stats.mtime;
     statsText += "\nAccessed: " + stats.atime;
-    //var statsText = "Size: " + stats;
-    document.getElementById('statsList').innerText = statsText;
-    togglePopUp();
-};
-
-function displayInfo(info){
-    var popUp = document.getElementById('popUp01');
-    document.getElementById('modName').innerText = "Favorites Details";
-    var statsText = "Favorites count: " + info.length;
-    statsText += "\nSize: " + info.size + " megabytes";
-    document.getElementById('statsList').innerText = statsText;
+    document.getElementById('popUpText').innerText = statsText;
     togglePopUp();
 };
 

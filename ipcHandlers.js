@@ -102,6 +102,22 @@ ipcRenderer.on('files', function(e, files){
     }
 });
 
+ipcRenderer.on('getInfo', (e) => {
+    console.log("getInfo:");
+    console.log(rightClickedElement);
+    if (!rightClickedElement)
+        return;
+    let path = rightClickedElement.getAttribute('data-path');
+    if (path != null){
+        let stats = fs.statSync(path);
+        displayStats(stats);
+    } 
+    else{
+        console.log("Path not found");
+    }
+
+});
+
 ipcRenderer.on('directories', (e, directories) => {
     console.log("Received directories: " + directories);
     var content = document.getElementById("content");

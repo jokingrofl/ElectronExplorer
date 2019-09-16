@@ -163,18 +163,6 @@ function zoomOut(){
     image.style.transform = 'scale(' + zoom_val + ')';
 }
 
-  function fixButtons(){
-      var buttons = document.getElementById("buttons");
-      if (buttons.classList.contains('fixed')){
-          buttons.classList.remove('fixed');
-          fixed = false;
-      }
-      else{
-        buttons.classList.add('fixed');
-        fixed = true;
-      }
-  }
-
   function updateDir(){
       console.log("updateDir called");
       var pathBox = document.getElementById('textBox1');
@@ -268,25 +256,20 @@ function zoomOut(){
         }
     };
 
-     //set up context menu depending on right clicked element
-   document.addEventListener('contextmenu', (e) =>{
-    console.log("addEventListener: ");
-    console.log(e.srcElement);
-    console.log(e.srcElement.tagName);
-    if (e.srcElement.tagName === "IMG"){
-        remote.getGlobal('contextMenu').popup(remote.getCurrentWindow());
-    }
-    else{
-        remote.getGlobal('genCM').popup(remote.getCurrentWindow());
-    }
-    
-
-   });
+ 
 
    function showFiles(){
        for(let i = 0; i < items.length; i++){
            console.log(items[i]);
        }
    }
+
+   let textBox = document.getElementById('textBox1');
+   textBox.addEventListener("keyup", (e) =>{
+    if (e.keyCode === 13){ //if key is enter
+        e.preventDefault();
+        onButton();
+    }
+   });
 
     

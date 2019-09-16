@@ -9,6 +9,8 @@ class Explorer_Item{
         this.isDirectory = stats.isDirectory();
         this.element = element;
         this.imageAppended = false;
+
+        this.element.setAttribute('data-path', item_path);
     }
 
     //set hover listener for getting preview image for directories
