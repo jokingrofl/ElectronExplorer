@@ -56,3 +56,10 @@ function closeOverlay(){
     var overlay = document.getElementById('overlay');
     overlay.style.display = "none";
 }
+
+function addToastToQueue(message){
+    actionsQ.push(customToast, message);
+    if(!actionsQ.isRunning){
+        actionsQ.start();
+    }
+}

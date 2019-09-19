@@ -121,10 +121,7 @@ ipcRenderer.on('getInfo', (e) => {
 });
 
 ipcRenderer.on('toast', (e, message) => {
-    actionsQ.push(customToast, message);
-    if(!actionsQ.isRunning){
-        actionsQ.start();
-    }
+    addToastToQueue(message);
 });
 
 ipcRenderer.on('delete', e => {
@@ -133,7 +130,7 @@ ipcRenderer.on('delete', e => {
         let success = shell.moveItemToTrash(path);
         if (success){
             console.log("Moved " + path + " to the trash");
-            ipcRenderer.send('toast', path + " removed");
+            addToastToQueue(path + " removed");
             rightClickedElement.parentNode.removeChild(rightClickedElement);
 
         }

@@ -141,11 +141,6 @@ ipcMain.on('Start', (e) => {
     console.log("Sent contents");
 });
 
-ipcMain.on('toast', (e, message) => {
-    mainWindow.webContents.send('toast', message);
-});
-
-
 ipcMain.on('getDirectory', function(e, directory){
     directory = path.normalize(directory);
     console.log("Running getDirectory for path " + directory);
