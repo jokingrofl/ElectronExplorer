@@ -126,20 +126,6 @@ h1, h2, h3, h4, p{
   overflow-y: hidden;
 }
 
-.popUp{
-  display: none;
-  height: 100vh;
-  width: 100%;
-  top: var(--bar-size);
-  position: fixed;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.75);
-  z-index: 11;
-  transition: all 2s;
-  animation-name: zoom;
-  animation-duration: 0.3s;
-}
-
 .textContainer{
   height: auto;
   width: 75%;
@@ -212,6 +198,7 @@ h1, h2, h3, h4, p{
 }
 
 #content{
+  padding-top: 35px;
   width: 100%;
   height: calc(100% - var(--tools-size));
   position: relative;
@@ -415,34 +402,6 @@ h1, h2, h3, h4, p{
   animation-duration: 0.6s;
 }
 
-@keyframes iconTranslate {
-  from{top: 50%; left: 50%;}
-  to{top: 0; left: 10%;}
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-
-/* zoom into view */
-@keyframes zoom {
-  from {transform: scale(0.1); opacity: 0;} 
-  to {transform: scale(1); opacity: 1;}
-}
-
-/* zoom in after clicking modal */
-@keyframes zoom2 {
-    from {transform: scale(1)}
-    to {transform: scale(2)}
-}
-
-/* zoom out after clicking modal */
-@keyframes zoomOut {
-    from {transform: scale(2)}
-    to {transform: scale(1)}
-}
-
 /* The Close Button */
 .close {
   position: absolute;
@@ -515,3 +474,4 @@ video {
   animation-name: iconTranslate;
   animation-duration: 0.75s;
 }
+

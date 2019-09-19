@@ -48,8 +48,8 @@ document.ondrop = function(e){
 //helper functions ---------------------------------------------------------------
 function isImage(name){
     let str = name.toLowerCase();
-    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('png') ||
-    str.includes('gif'));
+    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('.png') ||
+    str.includes('.gif') || str.includes('.webp'));
 }
 
 function isVideo(name){

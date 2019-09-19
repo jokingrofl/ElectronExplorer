@@ -77,7 +77,7 @@ function onClick(element){
 }
 
 function next(){
-    var images = document.getElementsByTagName('img'); 
+    var images = document.querySelectorAll('#content img');
     var srcList = [];
     for(var i = 0; i < images.length; i++) {
         srcList.push(images[i].src);
@@ -94,7 +94,7 @@ function next(){
     }
 
     var image = document.getElementById("img01");
-    if (++current >= srcList.length){return;}
+    current = (++current >= srcList.length) ? srcList.length - 1 : current;
     image.src = srcList[current];
     curStr = image.src;
     var captionText = document.getElementById("caption");

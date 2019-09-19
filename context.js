@@ -18,9 +18,9 @@
 
        //get the container of explorer item
        function getContainer(element){
-           console.log("getContainer:");
-            console.log(element);
-            console.log(element.parentElement);
+        //    console.log("getContainer:");
+        //     console.log(element);
+        //     console.log(element.parentElement);
 
            if(element.classList.contains('fileContainer'))
            return element;

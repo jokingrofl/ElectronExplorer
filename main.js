@@ -69,12 +69,21 @@ app.on('ready', function(){
             mainWindow.webContents.send('getInfo');
         }
     })
+
+    const moveToTrash = new MenuItem({
+        label: "Move to Trash",
+        click: (menu, window, event) => {
+            mainWindow.webContents.send('delete');
+        }
+    });
     
     ctxImage.append(openFileLocation);
     ctxImage.append(toggleDevTools);
     ctxImage.append(getInfo);
+    ctxImage.append(moveToTrash);
     ctxMenu.append(toggleDevTools);
     ctxMenu.append(getInfo);
+    ctxMenu.append(moveToTrash);
 
     mainWindow.webContents.on('context-menu', function(e, params){
         selectedUrl = params.srcURL.substr(8);
@@ -130,6 +139,10 @@ ipcMain.on('Start', (e) => {
     mainWindow.webContents.send('files', files);
     
     console.log("Sent contents");
+});
+
+ipcMain.on('toast', (e, message) => {
+    mainWindow.webContents.send('toast', message);
 });
 
 
@@ -225,8 +238,8 @@ ipcMain.on('getFirstImage', (e, dir_path) => {
 
 function isImage(name){
     let str = name.toLowerCase();
-    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('png') ||
-    str.includes('gif'));
+    return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('.png') ||
+    str.includes('.gif') || str.includes('.webp'));
 }
 
 function isVideo(name){

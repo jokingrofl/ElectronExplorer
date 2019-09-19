@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const Queue = require('./queue.js');
 var items = [];
+const actionsQ = new Queue();
 
 ipcRenderer.on('alert', (e, message) => {
     customAlert(message);
@@ -118,6 +120,28 @@ ipcRenderer.on('getInfo', (e) => {
 
 });
 
+ipcRenderer.on('toast', (e, message) => {
+    actionsQ.push(customToast, message);
+    if(!actionsQ.isRunning){
+        actionsQ.start();
+    }
+});
+
+ipcRenderer.on('delete', e => {
+    let path = rightClickedElement.getAttribute('data-path');
+    if (path != null){
+        let success = shell.moveItemToTrash(path);
+        if (success){
+            console.log("Moved " + path + " to the trash");
+            ipcRenderer.send('toast', path + " removed");
+            rightClickedElement.parentNode.removeChild(rightClickedElement);
+
+        }
+        else
+            console.log("Error: file could not be deleted");
+    }
+});
+
 ipcRenderer.on('directories', (e, directories) => {
     console.log("Received directories: " + directories);
     var content = document.getElementById("content");
@@ -149,17 +173,6 @@ ipcRenderer.on('directories', (e, directories) => {
         container.onclick = (e) =>{
             ipcRenderer.send('getDirectory', saved_directories[i]);
         };
-
-        /*
-        icon.onmouseenter = (e) =>{
-            console.log("Before mouse hover:");
-            console.log(hoveredElement);
-            hoveredElement = icon;
-            console.log("After:");
-            console.log(hoveredElement);
-            ipcRenderer.send('getFirstImage', saved_directories[i]);
-        };
-        */
         
         content.appendChild(container);
     }

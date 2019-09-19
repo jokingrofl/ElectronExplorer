@@ -1,0 +1,39 @@
+@keyframes iconTranslate {
+    from{top: 50%; left: 50%;}
+    to{top: 0; left: 10%;}
+  }
+  
+  @-webkit-keyframes zoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+  
+  /* zoom into view */
+  @keyframes zoom {
+    from {transform: scale(0.1); opacity: 0;} 
+    to {transform: scale(1); opacity: 1;}
+  }
+  
+  /* zoom in after clicking modal */
+  @keyframes zoom2 {
+      from {transform: scale(1)}
+      to {transform: scale(2)}
+  }
+  
+  /* zoom out after clicking modal */
+  @keyframes zoomOut {
+      from {transform: scale(2)}
+      to {transform: scale(1)}
+  }
+
+  @keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+  }

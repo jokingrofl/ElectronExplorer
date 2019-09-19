@@ -30,3 +30,29 @@ function customAlert(alert){
     document.getElementById('popUpText').innerText = "";
     togglePopUp();
 };
+
+async function customToast(message){
+    return new Promise((resolve, reject) => {
+        let toast = document.getElementById('toastMessage');
+        toast.innerHTML = message;
+        openOverlay();
+        setTimeout(resolve, 4100);
+    });
+    
+}
+
+function toggleOverlay(){
+    var overlay = document.getElementById('overlay');
+    overlay.style.display == "block"? overlay.style.display = "none": overlay.style.display = "block";
+}
+
+function openOverlay(){
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = "block";
+    setTimeout(closeOverlay, 4000);
+}
+
+function closeOverlay(){
+    var overlay = document.getElementById('overlay');
+    overlay.style.display = "none";
+}
