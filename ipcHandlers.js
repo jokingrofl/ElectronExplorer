@@ -68,7 +68,7 @@ ipcRenderer.on('files', function(e, files){
             items.push(item);
             var icon = document.createElement('img');
             icon.setAttribute('alt', files[i]);
-            icon.setAttribute('src', 'file.jpg');
+            icon.setAttribute('src', 'resources/file.jpg');
             if (hover_zoom){
                 icon.setAttribute('class', 'zoom-hover');
             }
@@ -156,7 +156,7 @@ ipcRenderer.on('directories', (e, directories) => {
         var fullPath = path.join(current_directory, directories[i]);
         var item = new Explorer_Item(fullPath, container);
         items.push(item);
-        icon.setAttribute('src', 'folder.png');
+        icon.setAttribute('src', 'resources/folder.png');
         if (hover_zoom){
             icon.setAttribute('class', 'zoom-hover');
         }
@@ -221,7 +221,7 @@ ipcRenderer.on('firstImage', (e, imagePath) => {
     //content.appendChild(firstImage);
     //hoveredElement.parentNode.appendChild(firstImage);
     var icon = document.createElement('img');
-    icon.setAttribute('src', 'openFolder.svg');
+    icon.setAttribute('src', 'resources/openFolder.svg');
     icon.classList.add('corner-icon');
     hoveredElement.parentNode.appendChild(icon);
     hoveredElement.parentNode.replaceChild(firstImage, hoveredElement);
