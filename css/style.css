@@ -17,6 +17,7 @@ h1, h2, h3, h4, p{
   width: 100%;
   background-color: darkslategrey;
   height: var(--tools-size);
+  border-bottom: solid 2px rgb(39, 39, 39);
 }
 
 #textBox1 {

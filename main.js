@@ -15,6 +15,7 @@ const {app, BrowserWindow, Menu, ipcMain, shell} = electron;
 
 let mainWindow;
 var currentDirectory;
+let fileWatcher = null;
 
 //context menus
 const ctxImage = new Menu();
@@ -116,8 +117,8 @@ const mainMenuTemplate = [
 
 ];
 
+//open home directory
 ipcMain.on('Start', (e) => {
-    console.log("Start button pressed");
     mainWindow.webContents.send("Clear");
     currentDirectory = homedir;
     mainWindow.webContents.send("directoryName", currentDirectory);
@@ -139,8 +140,10 @@ ipcMain.on('Start', (e) => {
     mainWindow.webContents.send('files', files);
     
     console.log("Sent contents");
+
 });
 
+//get the contents of directory and return file names to renderer
 ipcMain.on('getDirectory', function(e, directory){
     directory = path.normalize(directory);
     console.log("Running getDirectory for path " + directory);
@@ -149,7 +152,7 @@ ipcMain.on('getDirectory', function(e, directory){
     mainWindow.webContents.send('directoryName', directory);
     try{
         var contents = fs.readdirSync(directory);
-        console.log(contents);
+        //console.log(contents);
 
         var directories = contents.filter((value, index, arr) => {
             var fullPath = currentDirectory + "/" + value;
@@ -180,6 +183,16 @@ ipcMain.on('getDirectory', function(e, directory){
         mainWindow.webContents.send('files', files);
         
         console.log("Sent contents");
+
+        //watch directory for changes
+        if (fileWatcher != null) fileWatcher.close();
+    fileWatcher = fs.watch(currentDirectory, (event, fileName) => {
+        if (fileName){
+            console.log(fileName + ' changed');
+            console.log(event);
+        }
+    });
+
     }
     catch(err){
         console.log(err);
