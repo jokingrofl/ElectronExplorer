@@ -1,7 +1,7 @@
 /* Colors: #2F4F4F #80FFFF #66FFFF #B35824 #FF9F66 */
 :root{
   --bar-size: 30px;
-  --tools-size: 200px;
+  --tools-size: 150px;
 }
 
 body, html {

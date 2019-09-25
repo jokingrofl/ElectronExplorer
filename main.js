@@ -11,7 +11,7 @@ var selectedUrl = '';
 var selectedElement;
 
 
-const {app, BrowserWindow, Menu, ipcMain, shell} = electron;
+const {app, BrowserWindow, Menu, ipcMain, shell, globalShortcut} = electron;
 
 let mainWindow;
 var currentDirectory;
@@ -25,6 +25,17 @@ global.genCM = ctxMenu;
 
 //listen for app to be ready
 app.on('ready', function(){
+
+    //keyboard shortcuts
+    globalShortcut.register('CommandOrControl+M', () => {
+        mainWindow.minimize();
+    });
+
+    globalShortcut.register('Home', () => {
+        mainWindow.webContents.send('Home');
+    });
+    
+
     //create new window
     mainWindow = new BrowserWindow({
         webPreferences: {

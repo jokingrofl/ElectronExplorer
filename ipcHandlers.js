@@ -26,7 +26,8 @@ ipcRenderer.on('files', function(e, files){
 
             var newImg = document.createElement('img');
             newImg.setAttribute('alt', files[i]);
-            var path = document.getElementById('directory').innerText + '\\';
+            //var path = document.getElementById('directory').innerText + '\\';
+            var path = current_directory + '\\';
             path += files[i];
             var item = new Explorer_Item(path, container);
             items.push(item);
@@ -120,6 +121,10 @@ ipcRenderer.on('getInfo', (e) => {
 
 });
 
+ipcRenderer.on('Home', () =>{
+    ipcRenderer.send('Start');
+});
+
 ipcRenderer.on('toast', (e, message) => {
     addToastToQueue(message);
 });
@@ -180,9 +185,10 @@ ipcRenderer.on('directoryName', (e, name) => {
     dir_stack.push(name);
     current_directory = name;
     var pathBox = document.getElementById('textBox1');
-    var text = document.getElementById('directory');
+    //var text = document.getElementById('directory');
     var fixed = name.replace('//', '/');
-    text.innerText = fixed;
+    //text.innerText = fixed;
+    //currentDirectory = fixed;
     pathBox.setAttribute('value', fixed);
     console.log("Directory changed to " + current_directory);
     updateDir();

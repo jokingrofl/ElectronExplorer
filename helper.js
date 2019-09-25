@@ -91,7 +91,7 @@ function myKeyDown(e){
         zoomOut();
     }
     if (keynum == 77){ //m key
-        remote.getCurrentWindow().minimize();
+        //remote.getCurrentWindow().minimize();
     }
 
 

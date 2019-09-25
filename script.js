@@ -9,6 +9,7 @@ var hoveredElement;
 var breadPaths;
 
 
+
 function toggleZoom(){
     var checkbox = document.getElementById('zoomCheck');
     var images = document.querySelectorAll('#content img')
@@ -166,8 +167,13 @@ function zoomOut(){
   function updateDir(){
       console.log("updateDir called");
       var pathBox = document.getElementById('textBox1');
+
+      /*
       var text = document.getElementById('directory');
       text.innerHTML = pathBox.getAttribute('value');
+      */
+     //currentDirectory = pathBox.getAttribute('value');
+
       var paths = parsePath(pathBox.getAttribute('value'));
       var container = document.getElementById('breadcrumbs');
       container.innerHTML = '';
