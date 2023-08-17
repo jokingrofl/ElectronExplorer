@@ -27,7 +27,7 @@ class Quick_Item {
             sidebar.removeChild(this.row);
             quickList.splice(quickList.indexOf(this), 1);
             writeQuickFile();
-            log(quickList);
+            console.log(quickList);
         };
         this.row.appendChild(this.element);
         closeContainer.appendChild(closeBtn);

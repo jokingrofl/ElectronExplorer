@@ -19,7 +19,8 @@ function showQuickList() {
 
 function addQuickList() {
     let pathBox = document.getElementById("textBox1");
-    let quickPath = pathBox.getAttribute('value');
+    let quickPath = pathBox.value;
+    console.log(`${quickPath} path being added to quicklist`);
     let newQItem = new Quick_Item(quickPath);
     quickList.push(newQItem);
     writeQuickFile();
