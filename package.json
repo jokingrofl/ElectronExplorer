@@ -10,6 +10,11 @@
   "author": "psanchez",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^5.0.1"
+    "electron": "^11.1.1"
+  },
+  "dependencies": {
+    "drivelist": "^9.2.4",
+    "js-levenshtein": "^1.1.6",
+    "thumbsupply": "^0.4.0"
   }
 }

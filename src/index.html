@@ -10,26 +10,27 @@
 </head>
 
 <body>
-                <div id="overlay">
-                                <div class="toast">
-                                        <h2 id="toastMessage">
-                                                Toast
-                                        </h2>
-                                </div>
-                        </div>
+        <div id="overlay">
+                <div class="toast">
+                        <h2 id="toastMessage">
+                                Toast
+                        </h2>
+                </div>
+        </div>
 
         <div id="about" class="popUp">
                 <div class="textContainer">
                         <h2>About</h2>
                         <p>ElectronExplorer by Pablo Sanchez</p>
+                        <p>Loading animation by loading.io</p>
                         <input class="button" type="button" value="Close" onclick="toggleAbout()">
                 </div>
         </div>
         <div id="titleBar">
                 <h4 id="title">ElectronExplorer</h4>
                 <div id="controls-container">
-                        <a class="control" onclick="minimize()">_</a>
-                        <a class="control" onclick="maximize()">O</a>
+                        <a class="control" id="minimize" onclick="minimize()">_</a>
+                        <a class="control" id="maximize" onclick="maximize()">O</a>
                         <a class="control" id="close" onclick="quit()">X</a>
                 </div>
         </div>
@@ -42,28 +43,47 @@
                 </div>
         </div>
 
+        <div id="textPrompt" class="popUp">
+                <div class="textContainer">
+                        <h2>Enter Folder Name</h2>
+                        <input type="text" name="folder" id="folderName">
+                        <input id="folderPromptCreate" class="button" type="button" value="Create" onclick="newFolderHandler()">
+                        <input class="button" type="button" value="Cancel" onclick="closeFolderPrompt()">
+                </div>
+        </div>
+
         <h3 id="debug">Debug</h3>
         <div id="main">
                 <div id="topBar">
+                        <div class="topBarRow">
+                                <input type="button" class="button" value="Quick List" onclick="showQuickList()">
                                 <input class="button" type="button" value="Home" onclick="start()">
                                 <input class="button" type="button" value="<-" onclick="back()">
                                 <input class="button" type="button" value="^" onclick="up()">
-                        <input id="textBox1" type="text" size="35" name="url" placeholder="C:/Users/Public/Movies"
-                                autofocus>
+                                <input class="textBox" id="textBox1" type="text" size="35" name="url"
+                                        placeholder="C:/Users/Public/Movies" autofocus>
                                 <input class="button" type="button" value="->" onclick="onButton()">
                                 <input class="button" type="button" value="Settings" onclick="toggleNav()">
-                                <br><br>
-                        <div id="breadcrumbs">
+                        </div>
+                        <div class="topBarRow">
+                                <input class="button" type="button" value="New Folder" onclick="openFolderPrompt()">
+                                <input class="textBox" id="searchBox" type="text" size="20" placeholder="Search"">
+                                <input id="searchButton" class=" button" type="button" value="Search" onclick="search()">
+                        </div>
+                        <div class="topBarRow">
+                                <div id="breadcrumbs">
+                                </div>
+
 
                         </div>
                         <div id="buttons">
                                 <!--
                                         <h3 id="directory">Directory</h3>
                                 -->
-                                
-                                
-                                
-                                
+
+
+
+
                         </div>
                 </div>
 
@@ -81,7 +101,16 @@
                                 <input type="checkbox" id="thumbCheck" onclick="toggleThumbs()">
                                 <span class="checkmark"></span>
                         </label>
+                        <label class="container">Auto Preview Folders
+                                <input type="checkbox" id="autoPreview" onclick="togglePreview()">
+                                <span class="checkmark"></span>
+                        </label>
                         <label class="container" onclick="showFiles()">Debugging</label>
+                </div>
+                <div class="sidenav" id="quickList">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeQuickList()">&times;</a>
+                        <a href="#">QuickList</a>
+                        <a href="#" onclick="addQuickList()">Add Current Dir</a>
                 </div>
                 <script type="text/javascript" src="helper.js"></script>
                 <script type="text/javascript" src="files.js"></script>
@@ -90,6 +119,7 @@
                 <script type="text/javascript" src="pop_up.js"></script>
                 <script type="text/javascript" src="context.js"></script>
                 <script type="text/javascript" src="explorer_item.js"></script>
+                <script type="text/javascript" src="quick_item.js"></script>
 
                 <div id="myModal" class="modal">
                         <span class="close">×</span>

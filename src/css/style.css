@@ -1,15 +1,33 @@
 /* Colors: #2F4F4F #80FFFF #66FFFF #B35824 #FF9F66 */
 :root{
   --bar-size: 30px;
-  --tools-size: 150px;
+  --tools-size: 175px;
+  --primary-color: #2F4F4F;
+  --secondary-color: #80FFFF;
 }
 
 body, html {
     text-align: center;
+    font-family: 'Fjalla One', sans-serif !important;
 }
 
 h1, h2, h3, h4, p{
   color: white;
+}
+
+.textBox {
+	padding: 3px;
+	display: inline-block;
+	border-radius: 9999em;
+  border-color: linear-gradient(21deg, var(--primary-color), var(--secondary-color));
+  border-width: 5px;
+  transition: 1s;
+}
+
+.textBox:focus {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  outline: none;
+  border-color: linear-gradient(12deg, blue, green);
 }
 
 #topBar{
@@ -105,6 +123,7 @@ h1, h2, h3, h4, p{
   -webkit-app-region: no-drag;
   margin: 0;
   border: 0;
+  height: 100%;
 }
 
 .control:hover{
@@ -115,6 +134,16 @@ h1, h2, h3, h4, p{
 #debug{
   position: fixed;
   z-index: 10;
+}
+
+#maximize:hover{
+  background-color: #00CA4E;
+  color: white;
+}
+
+#minimize:hover{
+  background-color: #FFBD44;
+  color: white;
 }
 
 #main{
@@ -130,7 +159,7 @@ h1, h2, h3, h4, p{
 .textContainer{
   height: auto;
   width: 75%;
-  background-color:black;
+  background-color: rgba(0, 0, 0, 0.171);
   border: solid 2px #2F4F4F;
   border-radius: 25px;
   margin: auto;
@@ -140,6 +169,7 @@ h1, h2, h3, h4, p{
   left: 15%;
   display: block;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  backdrop-filter: blur(10px);
 }
 
 #breadcrumbs{
@@ -221,6 +251,9 @@ h1, h2, h3, h4, p{
   height: auto;
   transition: width 2s;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../../resources/loading.svg");
 }
 
 .preview{
@@ -254,6 +287,7 @@ h1, h2, h3, h4, p{
   overflow-x: hidden; 
   padding-top: 60px; 
   transition: 0.5s; 
+  backdrop-filter: blur(10px);
 }
 
 .sidenav:hover {
@@ -268,11 +302,68 @@ h1, h2, h3, h4, p{
   color: #818181;
   display: block;
   transition: 0.3s;
+  width: 250px;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .sidenav .container:hover {
   color: #f1f1f1;
+}
+
+.topBarRow {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.row {
+  display: block;
+  width: 250px;
+  height: auto;
+}
+
+.quickLink {
+  text-align: left!important;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  transition: 0.3s;
+  display: inline-block;
+  max-width: 70%;
+  height: auto;
+  cursor: pointer;
+}
+
+.quickLink:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .quickLinkClose {
+  display: inline-block;
+  position: relative;
+  right: 0;
+  color: #818181;
+  font-size: 25px;
+  transition: 0.3s;
+}
+
+.closeContainer {
+  display: inline-block;
+  position: relative;
+  right: 0;
+  width: 25%;
+  height: auto;
+  transition: 0.3s;
+  margin-left: 20%;
+}
+
+.closeContainer:hover {
+  background-color: white;
+}
+
+.sidenav .quickLinkClose:hover {
+  color: red;
+  cursor: pointer;
 }
 
 /* Position and style the close button (top right corner) */

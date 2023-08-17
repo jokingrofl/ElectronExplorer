@@ -1,10 +1,10 @@
     //set up context menu depending on right clicked element
     document.addEventListener('contextmenu', (e) =>{
-        rightClickedElement = e.srcElement;
+        rightClickedElement = e.target;
         console.log("addEventListener: ");
-        console.log(e.srcElement);
-        console.log(e.srcElement.tagName);
-        if (e.srcElement.tagName === "IMG"){
+        console.log(e.target);
+        console.log(e.target.tagName);
+        if (e.target.tagName === "IMG"){
             rightClickedElement = getContainer(rightClickedElement);
             remote.getGlobal('contextMenu').popup(remote.getCurrentWindow());
         }

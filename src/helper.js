@@ -1,3 +1,18 @@
+//const drivelist = require('drivelist');
+const thumbsupply = require('thumbsupply');
+
+function createThumbnail(videoSrc){
+    thumbsupply.generateThumbnail(videoSrc, {
+        size: thumbsupply.ThumbSize.MEDIUM, // or ThumbSize.LARGE
+        timestamp: "10%", // or `30` for 30 seconds
+        forceCreate: true,
+        cacheDir: "~cache",
+        mimetype: "video/mp4"
+    }).then(thumb => {
+        console.log(thumb);
+    });
+}
+
 //titlebar button functions ----------------------------------------------------
 function maximize(){
     var window = remote.getCurrentWindow();
@@ -46,6 +61,14 @@ document.ondrop = function(e){
 }
 
 //helper functions ---------------------------------------------------------------
+
+const levenshtein = require('js-levenshtein');
+
+//remove file:// and %20 from path string
+function formatPath(p){
+    return decodeURI(p.substring(8));
+}
+
 function isImage(name){
     let str = name.toLowerCase();
     return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('.png') ||
@@ -58,7 +81,7 @@ function isVideo(name){
 
 //detect keyboard presses, used for cycling images with arrow keys etc. ----------------------
 function myKeyDown(e){
-    if (document.activeElement === document.getElementById('textBox1')){
+    if (document.activeElement.type === "text"){
         return;
     }
     var keynum;
