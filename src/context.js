@@ -1,15 +1,16 @@
+    let selectedTargetPath = null;
     //set up context menu depending on right clicked element
     document.addEventListener('contextmenu', (e) =>{
         rightClickedElement = e.target;
         console.log("addEventListener: ");
         console.log(e.target);
         console.log(e.target.tagName);
+        rightClickedElement = getContainer(rightClickedElement);
+        selectedTargetPath = rightClickedElement.getAttribute('data-path');
         if (e.target.tagName === "IMG"){
-            rightClickedElement = getContainer(rightClickedElement);
             remote.getGlobal('contextMenu').popup(remote.getCurrentWindow());
         }
         else{
-            rightClickedElement = getContainer(rightClickedElement);
             remote.getGlobal('genCM').popup(remote.getCurrentWindow());
         }
         

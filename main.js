@@ -73,7 +73,8 @@ app.on('ready', function () {
         click: function (menu, window, event) {
             var item = selectedUrl.replaceAll('/', '\\');
             console.log("Opening " + item + " in file explorer");
-            shell.showItemInFolder(item);
+            //shell.showItemInFolder(item);
+            mainWindow.webContents.send('openFileLocationRequest', event);
         }
     });
 
@@ -312,6 +313,10 @@ ipcMain.on('File', function (e, filePath) {
 ipcMain.on('quickList', e => {
     console.log("Sending quicklist to renderer");
     mainWindow.webContents.send("quickList", quickList);
+});
+
+ipcMain.on('openFileLocation', (e, filePath) => {
+    shell.showItemInFolder(filePath);
 });
 
 function isImage(name) {

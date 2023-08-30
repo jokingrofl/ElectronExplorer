@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const Queue = require('./queue.js');
+const { log } = require('console');
 var items = [];
 const actionsQ = new Queue();
 let copyClipboard = null;
@@ -44,6 +45,7 @@ ipcRenderer.on('files', function (e, files) {
 
             var newImg = document.createElement('img');
             newImg.setAttribute('alt', files[i]);
+            newImg.setAttribute('loading', 'lazy');
             //var path = document.getElementById('directory').innerText + '\\';
             var path = current_directory + '\\';
             path += files[i];
@@ -253,4 +255,9 @@ ipcRenderer.on('image', function (e, imagePath) {
     document.getElementById("img01").src = imagePath;
     document.getElementById("myModal").style.display = "block";
     updateDir();
+});
+
+ipcRenderer.on('openFileLocationRequest', (event) => {
+    console.log("Open file location request received");
+    ipcRenderer.send('openFileLocation', selectedTargetPath);
 });
