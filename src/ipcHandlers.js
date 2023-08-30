@@ -88,9 +88,12 @@ ipcRenderer.on('files', function (e, files) {
             var icon = document.createElement('img');
             icon.setAttribute('alt', files[i]);
             icon.setAttribute('src', '../resources/file.jpg');
+
+            /* Removed zoom from file icon
             if (hover_zoom) {
                 icon.setAttribute('class', 'zoom-hover');
             }
+            */
 
             icon.classList.add('icon');
             container.setAttribute('onclick', "selectElement(this)");
@@ -199,9 +202,12 @@ ipcRenderer.on('directories', (e, directories) => {
         var item = new Explorer_Item(fullPath, container);
         items.push(item);
         icon.setAttribute('src', '../resources/folder.png');
+
+        /* Removed zoom from folder icon
         if (hover_zoom) {
             icon.setAttribute('class', 'zoom-hover');
         }
+        */
 
         icon.classList.add('icon');
         container.appendChild(icon);
