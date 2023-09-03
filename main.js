@@ -288,12 +288,6 @@ ipcMain.on('getDirectory', function (e, directory, searchQuery) {
     }
 });
 
-ipcMain.on('File', function (e, filePath) {
-    console.log("Receiving dragged file:");
-    console.log(filePath);
-    mainWindow.webContents.send("dragFile", filePath);
-});
-
 ipcMain.on('quickList', e => {
     console.log("Sending quicklist to renderer");
     mainWindow.webContents.send("quickList", quickList);

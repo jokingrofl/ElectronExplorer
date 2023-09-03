@@ -27,28 +27,6 @@ ipcRenderer.on('addQuicklist', (e) => {
     addQuickList();
 });
 
-ipcRenderer.on('dragFile', (e, filePath) => {
-    console.log("Received dragged file:");
-    console.log(filePath);
-    if(current_directory){
-        moveFileToDir(filePath, current_directory);
-        refresh();
-    }
-        
-    else
-        console.log("Current directory is undefined, file cannot be moved");
-});
-
-//TODO: Handle multiple files
-function moveFileToDir(sourcePath, destinationDir){
-    fs.rename(sourcePath, path.join(destinationDir, path.basename(sourcePath)), (err) => {
-        if(err)
-            console.log(err);
-        else
-            console.log(`File successfully moved to ${destinationDir}`);
-    });
-}
-
 //handle response from main app
 ipcRenderer.on('files', function (e, files) {
     var content = document.getElementById("content");

@@ -50,16 +50,30 @@ document.ondragend = function(){
     return false;
 }
 
+function moveFileToDir(sourcePath, destinationDir){
+    fs.rename(sourcePath, path.join(destinationDir, path.basename(sourcePath)), (err) => {
+        if(err)
+            console.log(err);
+        else
+            console.log(`File successfully moved to ${destinationDir}`);
+    });
+}
+
 document.ondrop = function(e){
-    /*
-    e.stopPropagation();
-    e.preventDefault();
-    */
    console.log("ondrop activated");
     var files = e.dataTransfer.files;
     console.log(files);
     console.log(files[0].path);
-    ipcRenderer.send('File', files[0].path);
+    if(current_directory){
+        for(file of files){
+            console.log("Received dragged file:");
+            console.log(file.path);
+            moveFileToDir(file.path, current_directory);   
+        }
+        refresh();
+    }
+    else
+        console.log("Current directory is undefined, file(s) cannot be moved"); 
 }
 
 //helper functions ---------------------------------------------------------------

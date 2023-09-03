@@ -17,14 +17,8 @@ var dir_stack = [];
 function onButton() {
     const input = document.getElementById("textBox1");
     console.log(input.value);
-    if (input.value.indexOf('.txt') >= 0) {
-        clearContent();
-        ipcRenderer.send('File', input.value);
-    }
-    else {
-        clearContent();
-        ipcRenderer.send('getDirectory', input.value);
-    }
+    clearContent();
+    ipcRenderer.send('getDirectory', input.value);
 }
 
 function search(){
