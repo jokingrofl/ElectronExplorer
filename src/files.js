@@ -2,7 +2,7 @@ const electron = require('electron');
 const { shell } = require('electron');
 const { ipcRenderer } = electron;
 
-var remote = electron.remote;
+var remote = require('@electron/remote');
 var dialog = remote.dialog;
 var largeThumbs = false;
 var hover_zoom = true;

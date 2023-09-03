@@ -40,18 +40,23 @@ app.on('ready', function () {
         mainWindow.webContents.send('Home');
     });
 
+    require('@electron/remote/main').initialize();
 
     //create new window
     mainWindow = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            contextIsolation: false
         },
         //for custom translucent title bar, note resizing does not work atm
         frame: false,
         transparent: true,
         vibrancy: "ultra-dark"
     });
+
+    require("@electron/remote/main").enable(mainWindow.webContents);
+
     //load html into window
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'src/index.html'),
@@ -311,3 +316,4 @@ String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 }
+
