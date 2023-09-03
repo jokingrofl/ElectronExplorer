@@ -289,25 +289,9 @@ ipcMain.on('getDirectory', function (e, directory, searchQuery) {
 });
 
 ipcMain.on('File', function (e, filePath) {
-    console.log("Attempting to open file");
-
-    if (isImage(filePath)) {
-        console.log("Detected image file");
-        var selectedImage = filePath;
-        filePath = filePath.substring(0, filePath.lastIndexOf("\\") + 1);
-        var files = fs.readdirSync(filePath);
-        var filtered = files.filter(function (value, index, arr) {
-            if (value.indexOf('.jpg') >= 0 || value.indexOf('.png') >= 0 ||
-                value.indexOf('.gif') >= 0) {
-                return true;
-            }
-            else
-                return false;
-        });
-        mainWindow.webContents.send('dirName', filePath);
-        mainWindow.webContents.send('files', filtered);
-        mainWindow.webContents.send('image', selectedImage);
-    }
+    console.log("Receiving dragged file:");
+    console.log(filePath);
+    mainWindow.webContents.send("dragFile", filePath);
 });
 
 ipcMain.on('quickList', e => {
