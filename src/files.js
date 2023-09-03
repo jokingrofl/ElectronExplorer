@@ -89,7 +89,7 @@ function newFolder(name){
         createFolder(current_directory + "/" + name);
     else
         createFolder(current_directory + "/new folder");
-    refresh();
+    //refresh();
 }
 
 document.getElementById('searchBox').addEventListener("keyup", e => {

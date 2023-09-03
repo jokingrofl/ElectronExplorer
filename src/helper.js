@@ -70,7 +70,7 @@ document.ondrop = function(e){
             console.log(file.path);
             moveFileToDir(file.path, current_directory);   
         }
-        refresh();
+        //refresh();
     }
     else
         console.log("Current directory is undefined, file(s) cannot be moved"); 

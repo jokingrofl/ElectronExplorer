@@ -47,7 +47,7 @@ class Explorer_Item {
                     console.log(e);
                 else{
                     console.log(`File moved`);
-                    refresh();
+                    //refresh();
                 }
                     
             });

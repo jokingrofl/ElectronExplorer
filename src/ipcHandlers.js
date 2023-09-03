@@ -139,8 +139,10 @@ ipcRenderer.on('paste', e => {
     fs.copyFile(copyClipboard, path.join(current_directory, path.basename(copyClipboard)), err => {
         if (err)
             console.log(err);
+        /*
         else
             refresh();
+        */
     });
 });
 
@@ -171,7 +173,7 @@ ipcRenderer.on('toast', (e, message) => {
 ipcRenderer.on('rename', e => {
     let path = rightClickedElement.getAttribute('data-path');
     fs.renameSync(path, path + "rename");
-    refresh();
+    //refresh();
 });
 
 ipcRenderer.on('refresh', e => {
