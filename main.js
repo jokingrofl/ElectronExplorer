@@ -24,7 +24,7 @@ const quickListPath = electronExPath + path.sep + "quickList.txt";
 
 //context menus
 const ctxImage = new Menu();
-global.contextMenu = ctxImage;
+global.imgContextMenu = ctxImage;
 const ctxMenu = new Menu();
 global.genCM = ctxMenu;
 

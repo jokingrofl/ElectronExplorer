@@ -8,7 +8,7 @@
         rightClickedElement = getContainer(rightClickedElement);
         selectedTargetPath = rightClickedElement.getAttribute('data-path');
         if (e.target.tagName === "IMG"){
-            remote.getGlobal('contextMenu').popup(remote.getCurrentWindow());
+            remote.getGlobal('imgContextMenu').popup(remote.getCurrentWindow());
         }
         else{
             remote.getGlobal('genCM').popup(remote.getCurrentWindow());

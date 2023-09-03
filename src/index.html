@@ -23,6 +23,7 @@
                         <h2>About</h2>
                         <p>ElectronExplorer by Pablo Sanchez</p>
                         <p>Loading animation by loading.io</p>
+                        <p>Icons by svgrepo</p>
                         <input class="button" type="button" value="Close" onclick="toggleAbout()">
                 </div>
         </div>
@@ -57,18 +58,22 @@
                 <div id="topBar">
                         <div class="topBarRow">
                                 <input type="button" class="button" value="Quick List" onclick="showQuickList()">
-                                <input class="button" type="button" value="Home" onclick="start()">
-                                <input class="button" type="button" value="<-" onclick="back()">
-                                <input class="button" type="button" value="^" onclick="up()">
+                                <img src="../resources/home.svg" alt="" class="button" onclick="start()">
+                                <!-- <input class="button" type="button" value="<-" onclick="back()">
+                                -->
+                                <img src="../resources/back.svg" alt="" class="button" onclick="back()">
+                                <img src="../resources/up.svg" alt="" class="button" onclick="up()">
                                 <input class="textBox" id="textBox1" type="text" size="35" name="url"
                                         placeholder="C:/Users/Public/Movies" autofocus>
-                                <input class="button" type="button" value="->" onclick="onButton()">
+                                <img src="../resources/right.svg" alt="" class="button" onclick="onButton()">
                                 <input class="button" type="button" value="Settings" onclick="toggleNav()">
                         </div>
                         <div class="topBarRow">
                                 <input class="button" type="button" value="New Folder" onclick="openFolderPrompt()">
                                 <input class="textBox" id="searchBox" type="text" size="20" placeholder="Search"">
-                                <input id="searchButton" class=" button" type="button" value="Search" onclick="search()">
+                                <!-- <input id="searchButton" class=" button" type="button" value="Search" onclick="search()">
+                                -->
+                                        <img src="../resources/search.svg" alt="" class="button" onclick="search()" id="searchButton">
                         </div>
                         <div class="topBarRow">
                                 <div id="breadcrumbs">
