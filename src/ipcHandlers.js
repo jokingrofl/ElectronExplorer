@@ -170,10 +170,11 @@ ipcRenderer.on('toast', (e, message) => {
     addToastToQueue(message);
 });
 
+//incomplete, see todo
 ipcRenderer.on('rename', e => {
     let path = rightClickedElement.getAttribute('data-path');
+    //TODO: Add a dialog box to input a new name
     fs.renameSync(path, path + "rename");
-    //refresh();
 });
 
 ipcRenderer.on('refresh', e => {

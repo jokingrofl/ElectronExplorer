@@ -57,7 +57,7 @@ function up() {
 
 function openFile(filePath) {
     console.log("Opening " + filePath);
-    shell.openItem(filePath);
+    shell.openPath(filePath);
 }
 
 function toggleThumbs() {
