@@ -62,6 +62,10 @@ function openFile(filePath) {
 
 function toggleThumbs() {
     largeThumbs = !largeThumbs;
+    if(largeThumbs)
+        document.getElementById("content").style.gridTemplateColumns = "1fr 1fr";
+    else
+        document.getElementById("content").style.gridTemplateColumns = "1fr 1fr 1fr 1fr";
 }
 
 function createFolder(dir) {

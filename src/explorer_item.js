@@ -31,6 +31,7 @@ class Explorer_Item {
                 return element.getAttribute('data-path');
         }
 
+        //TODO: fix bug where dragging to move a file moves file.jpg instead of intended file
         function dragStart(e) {
             e.dataTransfer.setData("text", getPath(e.target));
         }

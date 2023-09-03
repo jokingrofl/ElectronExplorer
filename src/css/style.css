@@ -201,31 +201,16 @@ h1, h2, h3, h4, p{
 }
 
 .fileContainer{
-  width: 25%;
+  width: 100%;
   height: auto;
   display: inline-block;
   cursor: pointer;
   transition: 0.5s;
   position: relative;
+  max-height: 30vh;
 }
 
 .fileContainer:hover{
-  background-color: rgba(0, 0, 0, 0.555);
-}
-
-.fileContainer2{
-  width: 50%;
-  height: auto;
-  display: inline-block;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.fileContainer2 img{
-  max-width: 50%!important;
-}
-
-.fileContainer2:hover{
   background-color: rgba(0, 0, 0, 0.555);
 }
 
@@ -240,6 +225,8 @@ h1, h2, h3, h4, p{
   position: relative;
   overflow: auto;
   background-color: darkslategrey;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .icon{

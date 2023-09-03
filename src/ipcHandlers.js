@@ -40,7 +40,7 @@ ipcRenderer.on('files', function (e, files) {
 
         if (isImage(files[i])) {
             if (largeThumbs) {
-                container.setAttribute('class', 'fileContainer2');
+                //container.setAttribute('class', 'fileContainer2');
             }
 
             var newImg = document.createElement('img');
