@@ -1,4 +1,5 @@
 //const drivelist = require('drivelist');
+/*
 const thumbsupply = require('thumbsupply');
 
 function createThumbnail(videoSrc){
@@ -12,6 +13,7 @@ function createThumbnail(videoSrc){
         console.log(thumb);
     });
 }
+*/
 
 //titlebar button functions ----------------------------------------------------
 function maximize(){
