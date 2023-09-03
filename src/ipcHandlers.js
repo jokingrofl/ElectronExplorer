@@ -174,6 +174,10 @@ ipcRenderer.on('rename', e => {
     refresh();
 });
 
+ipcRenderer.on('refresh', e => {
+    refresh();
+});
+
 ipcRenderer.on('delete', e => {
     let path = rightClickedElement.getAttribute('data-path');
     if (path != null) {

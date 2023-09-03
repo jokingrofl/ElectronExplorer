@@ -281,8 +281,11 @@ ipcMain.on('getDirectory', function (e, directory, searchQuery) {
         if (fileWatcher != null) fileWatcher.close();
         fileWatcher = fs.watch(currentDirectory, (event, fileName) => {
             if (fileName) {
-                console.log(fileName + ' changed');
-                console.log(event);
+                if(event === "rename"){
+                    console.log(fileName + ' changed');
+                    console.log("File possibly moved!");
+                    mainWindow.webContents.send('refresh');
+                }
             }
         });
 
