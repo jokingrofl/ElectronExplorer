@@ -2,7 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 const Queue = require('./queue.js');
-const { log } = require('console');
 var items = [];
 const actionsQ = new Queue();
 let copyClipboard = null;
@@ -184,15 +183,25 @@ ipcRenderer.on('refresh', e => {
 ipcRenderer.on('delete', e => {
     let path = rightClickedElement.getAttribute('data-path');
     if (path != null) {
-        let success = shell.moveItemToTrash(path);
-        if (success) {
-            console.log("Moved " + path + " to the trash");
-            addToastToQueue(path + " removed");
-            rightClickedElement.parentNode.removeChild(rightClickedElement);
+        //let success = shell.moveItemToTrash(path);
+        console.log(`Attempting to delete file at ${path}`);
+        //electron issue prevents shell.trashItem from working in renderer, must send to main
+        ipcRenderer.send('delete', path);
 
-        }
-        else
-            console.log("Error: file could not be deleted");
+        /*
+        shell.trashItem(path).then(success => {
+            if (success) {
+                console.log(success);
+                console.log("Moved " + path + " to the trash");
+                addToastToQueue(path + " removed");
+                rightClickedElement.parentNode.removeChild(rightClickedElement);
+    
+            }
+            else
+                console.log("Error: file could not be deleted");
+        });
+        */
+        
     }
 });
 

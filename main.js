@@ -305,6 +305,13 @@ ipcMain.on('openFileLocation', (e, filePath) => {
     shell.showItemInFolder(filePath);
 });
 
+ipcMain.on('delete', (e, filePath) => {
+    console.log(`Attempting to delete file at ${filePath}`);
+    shell.trashItem(filePath).then(result => {
+        console.log(result);
+    });
+});
+
 function isImage(name) {
     let str = name.toLowerCase();
     return (str.includes('.jpg') || str.includes('.jpeg') || str.includes('.png') ||
