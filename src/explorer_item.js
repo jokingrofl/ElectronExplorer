@@ -14,21 +14,26 @@ class Explorer_Item {
         this.isSelected = false;
         this.workspace = workspace;
         this.directory = directory;
+        this.element.onclick = e => {
+            e.stopPropagation();
+            if(!e.ctrlKey)
+                workspace.clearSelection();
+            this.setToSelected();
+            
+        };
         if(this.isDirectory){
-            this.element.onclick = (e) => {
+            this.element.ondblclick = (e) => {
                 e.stopPropagation();
                 ipcRenderer.send('getDirectory', this.directory);
             };
         }
-        else {
-            this.element.onclick = e => {
+        else{
+            this.element.ondblclick = e => {
                 e.stopPropagation();
-                if(!e.ctrlKey)
-                    workspace.clearSelection();
-                this.setToSelected();
-                
-            };
+                openFile(this.path);
+            }
         }
+        
         
     }
 

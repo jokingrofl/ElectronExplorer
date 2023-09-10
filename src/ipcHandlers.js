@@ -85,41 +85,7 @@ ipcRenderer.on('files', function (e, files) {
             var icon = document.createElement('img');
             icon.setAttribute('alt', files[i]);
             icon.setAttribute('src', '../resources/file.jpg');
-
-            /* Removed zoom from file icon
-            if (hover_zoom) {
-                icon.setAttribute('class', 'zoom-hover');
-            }
-            */
-
             icon.classList.add('icon');
-            //container.setAttribute('onclick', "selectElement(this)");
-
-            /*
-            icon.onclick = e => {
-                e.stopPropagation();
-            };
-            */
-
-            //double click file to open
-            container.ondblclick = (e) => {
-                e.stopPropagation();
-                var path = document.getElementById('textBox1').value + '\\';
-                var fullPath = path + saved_files[i];
-                console.log(i);
-                console.log(path);
-                console.log(saved_files[i]);
-                console.log(saved_files);
-                openFile(fullPath);
-            };
-
-            /*
-            container.onclick = e => {
-                e.stopPropagation();
-            }
-            */
-
-            //icon.setAttribute('onclick', clickFunction);
             container.appendChild(icon);
             item.setImage(icon);
         }
@@ -185,25 +151,9 @@ ipcRenderer.on('refresh', e => {
 ipcRenderer.on('delete', e => {
     let path = rightClickedElement.getAttribute('data-path');
     if (path != null) {
-        //let success = shell.moveItemToTrash(path);
         console.log(`Attempting to delete file at ${path}`);
         //electron issue prevents shell.trashItem from working in renderer, must send to main
         ipcRenderer.send('delete', path);
-
-        /*
-        shell.trashItem(path).then(success => {
-            if (success) {
-                console.log(success);
-                console.log("Moved " + path + " to the trash");
-                addToastToQueue(path + " removed");
-                rightClickedElement.parentNode.removeChild(rightClickedElement);
-    
-            }
-            else
-                console.log("Error: file could not be deleted");
-        });
-        */
-        
     }
 });
 
@@ -222,13 +172,6 @@ ipcRenderer.on('directories', (e, directories) => {
         var item = new Explorer_Item(fullPath, container, workspace, saved_directories[i]);
         items.push(item);
         icon.setAttribute('src', '../resources/folder.png');
-
-        /* Removed zoom from folder icon
-        if (hover_zoom) {
-            icon.setAttribute('class', 'zoom-hover');
-        }
-        */
-
         icon.classList.add('icon');
         container.appendChild(icon);
         container.setAttribute('class', 'fileContainer');
@@ -237,14 +180,6 @@ ipcRenderer.on('directories', (e, directories) => {
         title.innerText = directories[i];
         container.appendChild(title);
         item.setImage(icon);
-
-        /*
-        container.onclick = (e) => {
-            e.stopPropagation();
-            ipcRenderer.send('getDirectory', saved_directories[i]);
-        };
-        */
-
         content.appendChild(container);
     }
 });
