@@ -287,19 +287,6 @@ function start() {
     ipcRenderer.send('Start');
 }
 
-/* deprecate
-function selectElement(element) {
-    console.log(element);
-    if (element.classList.contains('selected')) {
-        element.classList.remove('selected');
-    }
-    else {
-        element.classList.add('selected');
-    }
-};
-*/
-
-
 function showFiles() {
     for (let i = 0; i < items.length; i++) {
         console.log(items[i]);

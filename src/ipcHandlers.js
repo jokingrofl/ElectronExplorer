@@ -1,4 +1,3 @@
-//const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const Queue = require('./queue.js');
@@ -39,10 +38,6 @@ ipcRenderer.on('files', function (e, files) {
         title.innerText = files[i];
 
         if (isImage(files[i])) {
-            if (largeThumbs) {
-                //container.setAttribute('class', 'fileContainer2');
-            }
-
             var newImg = document.createElement('img');
             newImg.setAttribute('alt', files[i]);
             newImg.setAttribute('loading', 'lazy');
