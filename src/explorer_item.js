@@ -3,7 +3,7 @@
 //isDirectory -- returns true if item is directory
 //element -- html element corresponding to item
 class Explorer_Item {
-    constructor(item_path, element) {
+    constructor(item_path, element, workspace, directory) {
         this.path = item_path;
         var stats = fs.statSync(item_path);
         this.isDirectory = stats.isDirectory();
@@ -11,6 +11,25 @@ class Explorer_Item {
         this.imageAppended = false;
         this.element.draggable = true;
         this.element.setAttribute('data-path', item_path);
+        this.isSelected = false;
+        this.workspace = workspace;
+        this.directory = directory;
+        if(this.isDirectory){
+            this.element.onclick = (e) => {
+                e.stopPropagation();
+                ipcRenderer.send('getDirectory', this.directory);
+            };
+        }
+        else {
+            this.element.onclick = e => {
+                e.stopPropagation();
+                if(!e.ctrlKey)
+                    workspace.clearSelection();
+                this.setToSelected();
+                
+            };
+        }
+        
     }
 
     /** set hover listener for getting preview image for directories */
@@ -102,5 +121,26 @@ class Explorer_Item {
 
 
         this.imageAppended = true;
+    }
+
+    setToSelected() {
+        this.isSelected = true;
+        //TODO: modify element CSS to reflect selected status
+        this.element.classList.add('selected');
+        this.workspace.selectedItems.push(this);
+    }
+
+    deselect() {
+        this.isSelected = false;
+        //TODO: modify element CSS to reflect deselected status
+        this.element.classList.remove('selected');
+        let newList = [];
+        for(let item of this.workspace.selectedItems){
+            if(item === this)
+                continue;
+            else
+                newList.push(item);
+        }
+        this.workspace.selectedItems = newList;
     }
 }

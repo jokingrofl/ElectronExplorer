@@ -13,6 +13,7 @@ const { fstat } = require("fs");
 const os = require("os");
 let quickFilePath = path.join(os.homedir(), "Documents", "Electron Explorer", "quickList.txt");
 
+
 function showQuickList() {
     document.getElementById("quickList").style.width = "250px";
 }
@@ -286,6 +287,7 @@ function start() {
     ipcRenderer.send('Start');
 }
 
+/* deprecate
 function selectElement(element) {
     console.log(element);
     if (element.classList.contains('selected')) {
@@ -295,7 +297,7 @@ function selectElement(element) {
         element.classList.add('selected');
     }
 };
-
+*/
 
 
 function showFiles() {

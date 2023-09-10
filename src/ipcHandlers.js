@@ -5,6 +5,7 @@ const Queue = require('./queue.js');
 var items = [];
 const actionsQ = new Queue();
 let copyClipboard = null;
+let workspace = new Workspace(document.getElementById('content'));
 
 ipcRenderer.on('alert', (e, message) => {
     customAlert(message);
@@ -48,7 +49,7 @@ ipcRenderer.on('files', function (e, files) {
             //var path = document.getElementById('directory').innerText + '\\';
             var path = current_directory + '\\';
             path += files[i];
-            var item = new Explorer_Item(path, container);
+            var item = new Explorer_Item(path, container, workspace);
             items.push(item);
             newImg.setAttribute('src', path);
             if (hover_zoom) {
@@ -70,7 +71,7 @@ ipcRenderer.on('files', function (e, files) {
             var path = document.getElementById('textBox1').value + '\\';
             path += files[i];
             newVid.src = path;
-            var item = new Explorer_Item(path, container);
+            var item = new Explorer_Item(path, container, workspace);
             items.push(item);
             newVid.setAttribute('controls', 'controls');
             newVid.onfullscreenchange = () => {
@@ -84,7 +85,7 @@ ipcRenderer.on('files', function (e, files) {
         else {
             var path = document.getElementById('textBox1').value + '\\';
             var fullPath = path + saved_files[i];
-            var item = new Explorer_Item(fullPath, container);
+            var item = new Explorer_Item(fullPath, container, workspace);
             items.push(item);
             var icon = document.createElement('img');
             icon.setAttribute('alt', files[i]);
@@ -97,10 +98,17 @@ ipcRenderer.on('files', function (e, files) {
             */
 
             icon.classList.add('icon');
-            container.setAttribute('onclick', "selectElement(this)");
+            //container.setAttribute('onclick', "selectElement(this)");
+
+            /*
+            icon.onclick = e => {
+                e.stopPropagation();
+            };
+            */
 
             //double click file to open
-            icon.ondblclick = () => {
+            container.ondblclick = (e) => {
+                e.stopPropagation();
                 var path = document.getElementById('textBox1').value + '\\';
                 var fullPath = path + saved_files[i];
                 console.log(i);
@@ -111,12 +119,10 @@ ipcRenderer.on('files', function (e, files) {
             };
 
             /*
-            icon.onclick = (event) =>{
-                console.log("onclick this: " + event.target);
-                event.target.classList += 'selected';
-            };
+            container.onclick = e => {
+                e.stopPropagation();
+            }
             */
-
 
             //icon.setAttribute('onclick', clickFunction);
             container.appendChild(icon);
@@ -126,6 +132,7 @@ ipcRenderer.on('files', function (e, files) {
         content.appendChild(container);
     }
     if (autoPreview) previewAll();
+    workspace.setItems(items);
 });
 
 ipcRenderer.on('copy', e => {
@@ -217,7 +224,7 @@ ipcRenderer.on('directories', (e, directories) => {
         var container = document.createElement('div');
         var icon = document.createElement('img');
         var fullPath = path.join(current_directory, directories[i]);
-        var item = new Explorer_Item(fullPath, container);
+        var item = new Explorer_Item(fullPath, container, workspace, saved_directories[i]);
         items.push(item);
         icon.setAttribute('src', '../resources/folder.png');
 
@@ -236,9 +243,12 @@ ipcRenderer.on('directories', (e, directories) => {
         container.appendChild(title);
         item.setImage(icon);
 
+        /*
         container.onclick = (e) => {
+            e.stopPropagation();
             ipcRenderer.send('getDirectory', saved_directories[i]);
         };
+        */
 
         content.appendChild(container);
     }
