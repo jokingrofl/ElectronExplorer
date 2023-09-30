@@ -204,7 +204,6 @@ h1, h2, h3, h4, p{
   width: 100%;
   height: auto;
   display: inline-block;
-  cursor: pointer;
   transition: 0.5s;
   position: relative;
   max-height: 30vh;
